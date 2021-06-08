@@ -4,5 +4,5 @@ import org.twitter.service.dto.TweetDTO;
 
 public interface ITweetService {
 
-    void tweet(String userContextEmail, TweetDTO tweetDTO);
+    TweetDTO tweet(String userContextEmail, TweetDTO tweetDTO);
 }

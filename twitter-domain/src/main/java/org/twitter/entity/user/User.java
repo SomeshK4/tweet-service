@@ -69,7 +69,4 @@ public class User extends Auditable {
         tweets.add(tweet);
         tweet.setUser(this);
     }
-
-
-
 }

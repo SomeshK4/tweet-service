@@ -22,9 +22,9 @@ public class TweetController {
     private ITweetService tweetService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> tweet(@RequestBody TweetDTO tweetDTO) {
+    public ResponseEntity<TweetDTO> tweet(@RequestBody TweetDTO tweetDTO) {
         String userContextEmail = userContextHandler.getCurrentUserContext().getEmail();
-        tweetService.tweet(userContextEmail, tweetDTO);
-        return ResponseEntity.ok().build();
+        TweetDTO tweet = tweetService.tweet(userContextEmail, tweetDTO);
+        return ResponseEntity.ok(tweet);
     }
 }
