@@ -12,11 +12,15 @@ import org.twitter.service.mappers.FollowersMapper;
 @Service
 public class FollowerService implements IFollowerService {
 
-    @Autowired
-    UserRepository userRepository;
+
+    private final UserRepository userRepository;
+    private final FollowersMapper followersMapper;
 
     @Autowired
-    FollowersMapper followersMapper;
+    public FollowerService(UserRepository userRepository, FollowersMapper followersMapper) {
+        this.userRepository = userRepository;
+        this.followersMapper = followersMapper;
+    }
 
 
     @Override

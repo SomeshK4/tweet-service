@@ -17,6 +17,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.twitter.entity.audit.Auditable;
+import org.twitter.entity.follower.Follower;
 import org.twitter.entity.reply.Reply;
 import org.twitter.entity.user.User;
 
@@ -41,5 +42,10 @@ public class Tweet extends Auditable {
 
     @OneToMany(mappedBy = "tweet", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reply> replies = new ArrayList<>();
+
+    public void addReply(Reply reply) {
+        replies.add(reply);
+        reply.setTweet(this);
+    }
 
 }

@@ -15,11 +15,15 @@ import org.twitter.service.user.IUserService;
 @Service
 public class FriendService implements IFriendService {
 
-    @Autowired
-    private IUserService userService;
+
+    private final IUserService userService;
+    private final UserRepository userRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    public FriendService(IUserService userService, UserRepository userRepository) {
+        this.userService = userService;
+        this.userRepository = userRepository;
+    }
 
 
     @Override
