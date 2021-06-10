@@ -1,6 +1,5 @@
 package org.twitter.service.problem;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import java.net.URI;
 import java.util.List;
@@ -9,12 +8,13 @@ import lombok.Data;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 
 /** @author someshkumar */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProblemDetail {
-  public static final String CONTENT_TYPE = "application/problem+json";
+  public static final MediaType CONTENT_TYPE = MediaType.APPLICATION_PROBLEM_JSON;
 
   private URI type;
   private String title;

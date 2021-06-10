@@ -32,10 +32,9 @@ public class ApiAuthenticationFailureHandler implements AuthenticationFailureHan
     
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
-			AuthenticationException e) throws IOException, ServletException {
-		
-		response.setStatus(HttpStatus.UNAUTHORIZED.value());
-		response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+			AuthenticationException e) throws IOException {
+
+		response.setContentType(ProblemDetail.CONTENT_TYPE.toString());
 
 		ProblemDetail problemDetail = new ProblemDetail.Builder()
 				.detail(e)
