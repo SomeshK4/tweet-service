@@ -15,7 +15,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\":\"somesh\",\r\n    \"password\":\"test1234\",\r\n    \"email\": \"someshk4@gmail.com\",\r\n    \"firstName\": \"somesh\",\r\n    \"lastName\":\"kumar\"\r\n}",
+					"raw": "{\r\n    \"username\":\"somesh\",\r\n    \"password\":\"test1234\",\r\n    \"email\": \"test@gmail.com\",\r\n    \"firstName\": \"somesh\",\r\n    \"lastName\":\"kumar\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -90,7 +90,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"password\":\"test1234\",\r\n    \"email\": \"someshk4@gmail.com\"\r\n}",
+					"raw": "{\r\n    \"password\":\"test1234\",\r\n    \"email\": \"test@gmail.com\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
