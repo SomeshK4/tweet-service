@@ -38,6 +38,7 @@
         <lombok.version>1.18.20</lombok.version>
         <map.struct.version>1.4.2.Final</map.struct.version>
         <jjwt.version>0.9.1</jjwt.version>
+        <maven.compiler.plugin>3.8.1</maven.compiler.plugin>
     </properties>
 
     <dependencyManagement>

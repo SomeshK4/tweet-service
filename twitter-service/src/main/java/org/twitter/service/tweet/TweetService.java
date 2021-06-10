@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.twitter.entity.reply.Reply;
 import org.twitter.entity.tweet.Tweet;
@@ -17,22 +17,14 @@ import org.twitter.service.mappers.TweetMapper;
 import org.twitter.service.user.IUserService;
 
 @Service
+@RequiredArgsConstructor
 public class TweetService implements ITweetService {
 
     private final IUserService userService;
     private final TweetRepository tweetRepository;
     private final  UserRepository userRepository;
     private final TweetMapper tweetMapper;
-
-    @Autowired
-    public TweetService(IUserService userService, TweetRepository tweetRepository, UserRepository userRepository,
-            TweetMapper tweetMapper) {
-        this.userService = userService;
-        this.tweetRepository = tweetRepository;
-        this.userRepository = userRepository;
-        this.tweetMapper = tweetMapper;
-    }
-
+    
     @Override
     public TweetDTO tweet(String userContextEmail, TweetDTO tweetDTO) {
         Optional<User> contextUser = userService.getUserByEmail(userContextEmail);
