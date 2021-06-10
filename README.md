@@ -6,6 +6,7 @@ This application is twitter-like service which support the following request :
 - User login
 - Follow a user
 - Unfollow a user
+- Tweet post
 - Fetch list of people following a user
 - Fetch list of tweets of a user (including self tweets and replies by followers)
 
