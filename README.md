@@ -39,4 +39,4 @@ mvn spring-boot:run
 
 ```
 
-### Note : Postman collection is in the root directory of the project
+**Rest API's Postman collection is in the root directory of the project**
