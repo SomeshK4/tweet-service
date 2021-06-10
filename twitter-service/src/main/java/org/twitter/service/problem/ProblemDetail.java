@@ -18,7 +18,6 @@ public class ProblemDetail {
 
   private URI type;
   private String title;
-  @JsonIgnore   //Detailed exception should not be presented to the user
   private String detail;
   private int status;
   private URI instance;

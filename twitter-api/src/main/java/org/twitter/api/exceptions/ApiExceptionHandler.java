@@ -2,6 +2,7 @@ package org.twitter.api.exceptions;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -62,11 +63,11 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
       ProblemDetail problemDetail = new ProblemDetail.Builder()
               .status(status)
-              .detail(ex)
+              .detail(new Exception("Request is not valid"))
               .invalidParams(errors)
               .build();
 
-      log.error("Validation error : {}", problemDetail);
+      log.error("Validation error : {}", problemDetail, ex);
 
       return handleExceptionInternal(ex, problemDetail, headers, status, request);
     }
