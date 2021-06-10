@@ -35,6 +35,7 @@ public class ApiAuthenticationFailureHandler implements AuthenticationFailureHan
 			AuthenticationException e) throws IOException {
 
 		response.setContentType(ProblemDetail.CONTENT_TYPE.toString());
+		response.setStatus(HttpStatus.UNAUTHORIZED.value());
 
 		ProblemDetail problemDetail = new ProblemDetail.Builder()
 				.detail(e)
