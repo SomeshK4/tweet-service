@@ -1,7 +1,7 @@
 package org.twitter.service.friend;
 
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.twitter.entity.follower.Follower;
@@ -13,17 +13,12 @@ import org.twitter.service.user.IUserService;
  * @author someshkumar
  */
 @Service
+@RequiredArgsConstructor
 public class FriendService implements IFriendService {
 
 
     private final IUserService userService;
     private final UserRepository userRepository;
-
-    @Autowired
-    public FriendService(IUserService userService, UserRepository userRepository) {
-        this.userService = userService;
-        this.userRepository = userRepository;
-    }
 
 
     @Override
