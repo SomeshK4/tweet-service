@@ -1,7 +1,7 @@
 # Tweet Service
 
 ## Introduction
-This application is twitter-like service which support the following request :
+This application is twitter-like service which support the following requests and uses JWT Token Authentication
 - Register a user
 - User login
 - Follow a user
