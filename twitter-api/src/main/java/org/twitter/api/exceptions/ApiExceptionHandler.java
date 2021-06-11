@@ -1,15 +1,14 @@
 package org.twitter.api.exceptions;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import org.twitter.service.problem.InvalidParams;
@@ -24,7 +23,7 @@ import org.twitter.service.problem.ProblemException;
  * proper ProblemDetail Response according to RFC - 7807
  */
 @Slf4j
-@ControllerAdvice
+@RestControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({ProblemException.class})
@@ -50,20 +49,18 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
             HttpHeaders headers, HttpStatus status, WebRequest request) {
       status = HttpStatus.BAD_REQUEST;
-      List<InvalidParams> errors = new ArrayList<>();
 
-      for (FieldError error : ex.getBindingResult().getFieldErrors()) {
-        errors.add(InvalidParams.builder()
-                .field(error.getField())
-                .message(error.getDefaultMessage())
-                .build());
+      List<InvalidParams> fieldErrors = ex.getBindingResult().getFieldErrors().stream()
+                .map(fieldError -> InvalidParams.builder()
+                        .field(fieldError.getField())
+                        .message(fieldError.getDefaultMessage())
+                        .build()
+                ).collect(Collectors.toList());
 
-      }
-
-      ProblemDetail problemDetail = new ProblemDetail.Builder()
+        ProblemDetail problemDetail = new ProblemDetail.Builder()
               .status(status)
               .detail(new Exception("Request is not valid"))
-              .invalidParams(errors)
+              .invalidParams(fieldErrors)
               .build();
 
       log.error("Validation error : {}", problemDetail, ex);
@@ -74,8 +71,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers,
             HttpStatus status,
-            WebRequest request
-    ) {
+            WebRequest request) {
         if (body instanceof ProblemDetail) {
             headers.setContentType(ProblemDetail.CONTENT_TYPE);
         }

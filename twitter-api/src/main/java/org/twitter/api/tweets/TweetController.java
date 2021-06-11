@@ -1,5 +1,7 @@
 package org.twitter.api.tweets;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -18,6 +20,7 @@ import org.twitter.service.tweet.ITweetService;
 
 @RestController
 @RequestMapping("/api/v1/tweets")
+@Tag(name = "Tweet", description = "Tweet's API")
 public class TweetController {
 
     @Autowired
@@ -26,6 +29,7 @@ public class TweetController {
     @Autowired
     private ITweetService tweetService;
 
+    @Operation(summary = "Tweet post")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TweetDTO> tweet(@RequestBody TweetDTO tweetDTO) {
@@ -34,6 +38,7 @@ public class TweetController {
         return ResponseEntity.ok(tweet);
     }
 
+    @Operation(summary = "Reply to a tweet")
     @PostMapping(value = "/{tweetId}/replies", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity reply(@PathVariable Long tweetId, @RequestBody ReplyDTO replyDTO) {
@@ -41,6 +46,7 @@ public class TweetController {
         return ResponseEntity.ok().build();
     }
 
+    @Operation(summary = "Fetch list of tweets of a user(including self tweets and replies by followers)")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<TweetDTO>> listTweets(@RequestParam String username) {
         List<TweetDTO> tweetDTOS = tweetService.listTweetAndReplies(username);
